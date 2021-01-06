@@ -2,6 +2,12 @@ import React, { useState } from 'react';
 import Board from './Board';
 import { calculateWinner} from '../helpers';
 
+const style = {
+    width: '200px',
+    margin: '20px auto',
+    fontSize: '1.5rem'
+};
+
 const Game = () => { 
     const [board, setBoard] = useState(Array(9).fill(null));
     const [xIsNext, setXisNext] = useState(true);
@@ -23,12 +29,20 @@ const Game = () => {
 
     }
 
-    const renderMoves = () => {
+    const renderMoves = () => (
+        <button style={style} onClick={() => setBoard(Array(9).fill(null))}>
+            Start Game
+        </button>
+    )
 
-    }
-
-    return(
+    return (
+        <>
         <Board squares={board} onClick={handleClick}/>
+        <div style={style}>
+                <p>{winner ? 'The winner is : ' + winner : 'Next Player is : ' + (xIsNext ? 'X' : 'O')}</p>
+                {renderMoves()}
+        </div>
+        </>
     )
 }
 
